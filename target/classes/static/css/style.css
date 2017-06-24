@@ -46,11 +46,17 @@ label{
     -o-background-size: cover;
     min-height:88px;
     position:relative;
+    margin: 0 auto;
 }
 .top-menu {
     text-align: center;
     padding-top: 2.3em;
 }
+
+.top-menu ul{
+    text-align: right;
+}
+
 .top-menu ul li{
     display: inline-block;
     margin: 0 10px;
@@ -124,11 +130,8 @@ nav a:focus {
     text-transform:uppercase;
 }
 .logo {
-    position: absolute;
-    top: 100%;
-    left: 13%;
-    z-index: 999;
-    width: 22.8%;
+    padding: 15px 0;
+    width: 30%;
 }
 .logo img{
     width:100%;
