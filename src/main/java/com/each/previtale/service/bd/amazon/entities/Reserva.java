@@ -7,9 +7,9 @@ package com.each.previtale.service.bd.amazon.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,9 +18,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -30,28 +30,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "reserva")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Reserva.findAll", query = "SELECT r FROM Reserva r")
-    , @NamedQuery(name = "Reserva.findByIdreserva", query = "SELECT r FROM Reserva r WHERE r.idreserva = :idreserva")
-    , @NamedQuery(name = "Reserva.findByData", query = "SELECT r FROM Reserva r WHERE r.data = :data")
-    , @NamedQuery(name = "Reserva.findByConflitoReserva", query = "SELECT r FROM Reserva r WHERE r.conflitoReserva = :conflitoReserva")
-    , @NamedQuery(name = "Reserva.findByMotivo", query = "SELECT r FROM Reserva r WHERE r.motivo = :motivo")})
+    @NamedQuery(name = "Reserva.findAll", query = "SELECT r FROM Reserva r")})
 public class Reserva implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
+    @GenericGenerator(name = "seqReserva", strategy = "org.hibernate.id.IncrementGenerator")
+    @GeneratedValue(generator = "seqReserva")
     @Column(name = "idreserva")
     private Integer idreserva;
     @Column(name = "data")
     @Temporal(TemporalType.TIMESTAMP)
     private Date data;
+    @Column(name = "data_fim")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataFim;
     @Column(name = "conflito_reserva")
     private Short conflitoReserva;
     @Size(max = 200)
     @Column(name = "motivo")
     private String motivo;
-    @JoinColumn(name = "praca_esportiva_praca_esportivaId", referencedColumnName = "praca_esportivaId")
+    @JoinColumn(name = "praca_esportiva_praca_esportiva_id", referencedColumnName = "praca_esportiva_id")
     @ManyToOne(optional = false)
     private PracaEsportiva pracaesportivapracaesportivaId;
     @JoinColumn(name = "time_idtime", referencedColumnName = "idtime")
@@ -80,6 +79,16 @@ public class Reserva implements Serializable {
     public void setData(Date data) {
         this.data = data;
     }
+
+    public Date getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
+    }
+    
+    
 
     public Short getConflitoReserva() {
         return conflitoReserva;

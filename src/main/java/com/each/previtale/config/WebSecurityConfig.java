@@ -31,22 +31,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .maximumSessions(1)
                 .expiredUrl("/");
 
-//        http.authorizeRequests()
-//                .antMatchers("/css/**").permitAll()
-//                .antMatchers("/images/**").permitAll()
-//                .antMatchers("/js/**").permitAll()
-//                .antMatchers("/static/**").permitAll()
-//                .antMatchers("/").permitAll()
-//                .antMatchers("/**").authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/").successForwardUrl("/setup/init")
-//                .and()
-//                .logout()
-//                .logoutUrl("/logout")
-//                .deleteCookies("remove")
-//                .invalidateHttpSession(true)
-//                .permitAll();
+        http.authorizeRequests()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/images/**").permitAll()
+                .antMatchers("/js/**").permitAll()
+                .antMatchers("/static/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/dashboard/**").authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login").successForwardUrl("/dashboard/")
+                .and()
+                .logout()
+                .logoutUrl("/login?logout")
+                .deleteCookies("remove")
+                .invalidateHttpSession(true)
+                .permitAll();
 
         http.csrf().disable();
     }

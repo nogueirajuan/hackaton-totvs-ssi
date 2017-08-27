@@ -27,10 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "tecnico")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tecnico.findAll", query = "SELECT t FROM Tecnico t")
-    , @NamedQuery(name = "Tecnico.findByDataGestao", query = "SELECT t FROM Tecnico t WHERE t.dataGestao = :dataGestao")
-    , @NamedQuery(name = "Tecnico.findByUserRg", query = "SELECT t FROM Tecnico t WHERE t.tecnicoPK.userRg = :userRg")
-    , @NamedQuery(name = "Tecnico.findByTimeIdtime", query = "SELECT t FROM Tecnico t WHERE t.tecnicoPK.timeIdtime = :timeIdtime")})
+    @NamedQuery(name = "Tecnico.findAll", query = "SELECT t FROM Tecnico t")})
 public class Tecnico implements Serializable {
 
     private static final long serialVersionUID = 1L;

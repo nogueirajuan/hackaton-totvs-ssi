@@ -7,10 +7,10 @@ package com.each.previtale.service.bd.amazon.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,10 +18,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -31,16 +31,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "time")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Time.findAll", query = "SELECT t FROM Time t")
-    , @NamedQuery(name = "Time.findByIdtime", query = "SELECT t FROM Time t WHERE t.idtime = :idtime")
-    , @NamedQuery(name = "Time.findByNome", query = "SELECT t FROM Time t WHERE t.nome = :nome")
-    , @NamedQuery(name = "Time.findByGenero", query = "SELECT t FROM Time t WHERE t.genero = :genero")})
+    @NamedQuery(name = "Time.findAll", query = "SELECT t FROM Time t")})
 public class Time implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
+    @GenericGenerator(name = "seqTime", strategy = "org.hibernate.id.IncrementGenerator")
+    @GeneratedValue(generator = "seqTime")
     @Column(name = "idtime")
     private Integer idtime;
     @Size(max = 45)
@@ -55,7 +52,7 @@ public class Time implements Serializable {
     private List<DiretorModalidade> diretorModalidadeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "time")
     private List<Tecnico> tecnicoList;
-    @JoinColumn(name = "Modalidades_ModalidadesId", referencedColumnName = "ModalidadesId")
+    @JoinColumn(name = "modalidades_modalidades_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Modalidades modalidadesModalidadesId;
     @JoinColumn(name = "atletica_idatletica", referencedColumnName = "idatletica")
@@ -171,5 +168,5 @@ public class Time implements Serializable {
     public String toString() {
         return "com.each.previtale.service.bd.amazon.entities.Time[ idtime=" + idtime + " ]";
     }
-    
+
 }

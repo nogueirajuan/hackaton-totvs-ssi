@@ -7,19 +7,18 @@ package com.each.previtale.service.bd.amazon.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -29,20 +28,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "atletica")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Atletica.findAll", query = "SELECT a FROM Atletica a")
-    , @NamedQuery(name = "Atletica.findByIdatletica", query = "SELECT a FROM Atletica a WHERE a.idatletica = :idatletica")
-    , @NamedQuery(name = "Atletica.findByNome", query = "SELECT a FROM Atletica a WHERE a.nome = :nome")
-    , @NamedQuery(name = "Atletica.findBySigla", query = "SELECT a FROM Atletica a WHERE a.sigla = :sigla")
-    , @NamedQuery(name = "Atletica.findByPresidente", query = "SELECT a FROM Atletica a WHERE a.presidente = :presidente")
-    , @NamedQuery(name = "Atletica.findByVice", query = "SELECT a FROM Atletica a WHERE a.vice = :vice")
-    , @NamedQuery(name = "Atletica.findByFaculdade", query = "SELECT a FROM Atletica a WHERE a.faculdade = :faculdade")
-    , @NamedQuery(name = "Atletica.findByFinanceiro", query = "SELECT a FROM Atletica a WHERE a.financeiro = :financeiro")})
+    @NamedQuery(name = "Atletica.findAll", query = "SELECT a FROM Atletica a")})
 public class Atletica implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
+    @GenericGenerator(name = "seqAtletica", strategy = "org.hibernate.id.IncrementGenerator")
+    @GeneratedValue(generator = "seqAtletica")
     @Column(name = "idatletica")
     private Integer idatletica;
     @Size(max = 45)
@@ -131,7 +123,6 @@ public class Atletica implements Serializable {
         this.financeiro = financeiro;
     }
 
-    @XmlTransient
     public List<Time> getTimeList() {
         return timeList;
     }
@@ -140,7 +131,6 @@ public class Atletica implements Serializable {
         this.timeList = timeList;
     }
 
-    @XmlTransient
     public List<TelefoneAtletica> getTelefoneAtleticaList() {
         return telefoneAtleticaList;
     }

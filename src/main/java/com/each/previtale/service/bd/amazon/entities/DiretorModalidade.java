@@ -24,10 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "diretor_modalidade")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "DiretorModalidade.findAll", query = "SELECT d FROM DiretorModalidade d")
-    , @NamedQuery(name = "DiretorModalidade.findByAnoMandato", query = "SELECT d FROM DiretorModalidade d WHERE d.anoMandato = :anoMandato")
-    , @NamedQuery(name = "DiretorModalidade.findByUserRg", query = "SELECT d FROM DiretorModalidade d WHERE d.diretorModalidadePK.userRg = :userRg")
-    , @NamedQuery(name = "DiretorModalidade.findByTimeIdtime", query = "SELECT d FROM DiretorModalidade d WHERE d.diretorModalidadePK.timeIdtime = :timeIdtime")})
+    @NamedQuery(name = "DiretorModalidade.findAll", query = "SELECT d FROM DiretorModalidade d")})
 public class DiretorModalidade implements Serializable {
 
     private static final long serialVersionUID = 1L;

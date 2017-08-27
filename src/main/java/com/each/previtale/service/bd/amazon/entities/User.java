@@ -8,10 +8,10 @@ package com.each.previtale.service.bd.amazon.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -19,10 +19,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -32,21 +31,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "user")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
-    , @NamedQuery(name = "User.findByRg", query = "SELECT u FROM User u WHERE u.rg = :rg")
-    , @NamedQuery(name = "User.findByNome", query = "SELECT u FROM User u WHERE u.nome = :nome")
-    , @NamedQuery(name = "User.findBySexo", query = "SELECT u FROM User u WHERE u.sexo = :sexo")
-    , @NamedQuery(name = "User.findByNascimento", query = "SELECT u FROM User u WHERE u.nascimento = :nascimento")
-    , @NamedQuery(name = "User.findByCpf", query = "SELECT u FROM User u WHERE u.cpf = :cpf")
-    , @NamedQuery(name = "User.findByEDiretor", query = "SELECT u FROM User u WHERE u.eDiretor = :eDiretor")
-    , @NamedQuery(name = "User.findByETecnico", query = "SELECT u FROM User u WHERE u.eTecnico = :eTecnico")
-    , @NamedQuery(name = "User.findByEAluno", query = "SELECT u FROM User u WHERE u.eAluno = :eAluno")})
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
+    @GenericGenerator(name = "seqUser", strategy = "org.hibernate.id.IncrementGenerator")
+    @GeneratedValue(generator = "seqUser")
     @Column(name = "rg")
     private Integer rg;
     @Size(max = 45)
@@ -67,8 +58,7 @@ public class User implements Serializable {
     private Short eTecnico;
     @Column(name = "e_aluno")
     private Short eAluno;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Aluno> alunoList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<DiretorModalidade> diretorModalidadeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -146,17 +136,6 @@ public class User implements Serializable {
     public void setEAluno(Short eAluno) {
         this.eAluno = eAluno;
     }
-
-    @XmlTransient
-    public List<Aluno> getAlunoList() {
-        return alunoList;
-    }
-
-    public void setAlunoList(List<Aluno> alunoList) {
-        this.alunoList = alunoList;
-    }
-
-    @XmlTransient
     public List<DiretorModalidade> getDiretorModalidadeList() {
         return diretorModalidadeList;
     }
@@ -165,7 +144,6 @@ public class User implements Serializable {
         this.diretorModalidadeList = diretorModalidadeList;
     }
 
-    @XmlTransient
     public List<TelefoneUser> getTelefoneUserList() {
         return telefoneUserList;
     }
@@ -174,33 +152,12 @@ public class User implements Serializable {
         this.telefoneUserList = telefoneUserList;
     }
 
-    @XmlTransient
     public List<Tecnico> getTecnicoList() {
         return tecnicoList;
     }
 
     public void setTecnicoList(List<Tecnico> tecnicoList) {
         this.tecnicoList = tecnicoList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (rg != null ? rg.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
-            return false;
-        }
-        User other = (User) object;
-        if ((this.rg == null && other.rg != null) || (this.rg != null && !this.rg.equals(other.rg))) {
-            return false;
-        }
-        return true;
     }
 
     @Override

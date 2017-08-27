@@ -7,10 +7,10 @@ package com.each.previtale.service.bd.amazon.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -20,10 +20,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -33,17 +33,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "praca_esportiva")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PracaEsportiva.findAll", query = "SELECT p FROM PracaEsportiva p")
-    , @NamedQuery(name = "PracaEsportiva.findByPracaesportivaId", query = "SELECT p FROM PracaEsportiva p WHERE p.pracaesportivaId = :pracaesportivaId")
-    , @NamedQuery(name = "PracaEsportiva.findByNome", query = "SELECT p FROM PracaEsportiva p WHERE p.nome = :nome")
-    , @NamedQuery(name = "PracaEsportiva.findByDescricao", query = "SELECT p FROM PracaEsportiva p WHERE p.descricao = :descricao")})
+    @NamedQuery(name = "PracaEsportiva.findAll", query = "SELECT p FROM PracaEsportiva p")})
 public class PracaEsportiva implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "praca_esportivaId")
+    @GenericGenerator(name = "seqPraca", strategy = "org.hibernate.id.IncrementGenerator")
+    @GeneratedValue(generator = "seqPraca")
+    @Column(name = "praca_esportiva_id")
     private Integer pracaesportivaId;
     @Size(max = 45)
     @Column(name = "nome")
@@ -52,8 +49,8 @@ public class PracaEsportiva implements Serializable {
     @Column(name = "descricao")
     private String descricao;
     @JoinTable(name = "modalidades_praca", joinColumns = {
-        @JoinColumn(name = "praca_esportiva_praca_esportivaId", referencedColumnName = "praca_esportivaId")}, inverseJoinColumns = {
-        @JoinColumn(name = "Modalidades_ModalidadesId", referencedColumnName = "ModalidadesId")})
+        @JoinColumn(name = "praca_esportiva_praca_esportiva_id", referencedColumnName = "praca_esportiva_id")}, inverseJoinColumns = {
+        @JoinColumn(name = "Modalidades_ModalidadesId", referencedColumnName = "id")})
     @ManyToMany
     private List<Modalidades> modalidadesList;
     @JoinColumn(name = "local_idlocal", referencedColumnName = "idlocal")

@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -19,7 +20,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -29,19 +30,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "local")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Local.findAll", query = "SELECT l FROM Local l")
-    , @NamedQuery(name = "Local.findByIdlocal", query = "SELECT l FROM Local l WHERE l.idlocal = :idlocal")
-    , @NamedQuery(name = "Local.findByNome", query = "SELECT l FROM Local l WHERE l.nome = :nome")
-    , @NamedQuery(name = "Local.findByRua", query = "SELECT l FROM Local l WHERE l.rua = :rua")
-    , @NamedQuery(name = "Local.findByNumero", query = "SELECT l FROM Local l WHERE l.numero = :numero")
-    , @NamedQuery(name = "Local.findByCidade", query = "SELECT l FROM Local l WHERE l.cidade = :cidade")
-    , @NamedQuery(name = "Local.findByEstado", query = "SELECT l FROM Local l WHERE l.estado = :estado")})
+    @NamedQuery(name = "Local.findAll", query = "SELECT l FROM Local l")})
 public class Local implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
+    @GenericGenerator(name = "seqLocal", strategy = "org.hibernate.id.IncrementGenerator")
+    @GeneratedValue(generator = "seqLocal")
     @Column(name = "idlocal")
     private Integer idlocal;
     @Size(max = 45)
@@ -125,7 +120,7 @@ public class Local implements Serializable {
         this.estado = estado;
     }
 
-    @XmlTransient
+    
     public List<PracaEsportiva> getPracaEsportivaList() {
         return pracaEsportivaList;
     }
@@ -134,7 +129,7 @@ public class Local implements Serializable {
         this.pracaEsportivaList = pracaEsportivaList;
     }
 
-    @XmlTransient
+    
     public List<TelefoneLocal> getTelefoneLocalList() {
         return telefoneLocalList;
     }

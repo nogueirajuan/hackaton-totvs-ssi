@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
@@ -20,7 +21,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -30,18 +31,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "modalidades")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Modalidades.findAll", query = "SELECT m FROM Modalidades m")
-    , @NamedQuery(name = "Modalidades.findByModalidadesId", query = "SELECT m FROM Modalidades m WHERE m.modalidadesId = :modalidadesId")
-    , @NamedQuery(name = "Modalidades.findBySigla", query = "SELECT m FROM Modalidades m WHERE m.sigla = :sigla")
-    , @NamedQuery(name = "Modalidades.findByNome", query = "SELECT m FROM Modalidades m WHERE m.nome = :nome")})
+    @NamedQuery(name = "Modalidades.findAll", query = "SELECT m FROM Modalidades m")})
 public class Modalidades implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ModalidadesId")
-    private Integer modalidadesId;
+    @GenericGenerator(name = "seqModalidade", strategy = "org.hibernate.id.IncrementGenerator")
+    @GeneratedValue(generator = "seqModalidade")
+    @Column(name = "id")
+    private Integer Id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2)
@@ -61,21 +59,25 @@ public class Modalidades implements Serializable {
     }
 
     public Modalidades(Integer modalidadesId) {
-        this.modalidadesId = modalidadesId;
+        this.Id = modalidadesId;
     }
 
     public Modalidades(Integer modalidadesId, String sigla, String nome) {
-        this.modalidadesId = modalidadesId;
+        this.Id = modalidadesId;
         this.sigla = sigla;
         this.nome = nome;
     }
 
+    public Integer getId() {
+        return Id;
+    }
+    
     public Integer getModalidadesId() {
-        return modalidadesId;
+        return Id;
     }
 
     public void setModalidadesId(Integer modalidadesId) {
-        this.modalidadesId = modalidadesId;
+        this.Id = modalidadesId;
     }
 
     public String getSigla() {
@@ -94,7 +96,6 @@ public class Modalidades implements Serializable {
         this.nome = nome;
     }
 
-    @XmlTransient
     public List<PracaEsportiva> getPracaEsportivaList() {
         return pracaEsportivaList;
     }
@@ -103,7 +104,6 @@ public class Modalidades implements Serializable {
         this.pracaEsportivaList = pracaEsportivaList;
     }
 
-    @XmlTransient
     public List<Time> getTimeList() {
         return timeList;
     }
@@ -115,7 +115,7 @@ public class Modalidades implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (modalidadesId != null ? modalidadesId.hashCode() : 0);
+        hash += (Id != null ? Id.hashCode() : 0);
         return hash;
     }
 
@@ -126,7 +126,7 @@ public class Modalidades implements Serializable {
             return false;
         }
         Modalidades other = (Modalidades) object;
-        if ((this.modalidadesId == null && other.modalidadesId != null) || (this.modalidadesId != null && !this.modalidadesId.equals(other.modalidadesId))) {
+        if ((this.Id == null && other.Id != null) || (this.Id != null && !this.Id.equals(other.Id))) {
             return false;
         }
         return true;
@@ -134,7 +134,7 @@ public class Modalidades implements Serializable {
 
     @Override
     public String toString() {
-        return "com.each.previtale.service.bd.amazon.entities.Modalidades[ modalidadesId=" + modalidadesId + " ]";
+        return "com.each.previtale.service.bd.amazon.entities.Modalidades[ modalidadesId=" + Id + " ]";
     }
     
 }
