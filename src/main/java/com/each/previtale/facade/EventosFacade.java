@@ -41,11 +41,14 @@ public class EventosFacade {
         }
     }
 
-    public void buscarEventoPorId(Integer idEvento) {
+    public Eventos buscarEventoPorId(Integer idEvento) throws Exception {
         try {
-            eventosRepository.findByIdEvento(idEvento);
+            Eventos evento = eventosRepository.findOne(idEvento);
+            log.log(Level.INFO, "[HACKATHON]-[BUSCAR-EVENTO-POR-ID]-[EVENTO]-[{}]", evento);
+            return evento;
         } catch (Exception e) {
             log.log(Level.INFO, "[HACKATHON]-[BUSCAR-EVENTO-POR-ID]-[EXCEPTION]-[{}]", e.getMessage());
+            throw new Exception(e.getMessage());
         }
     }
 

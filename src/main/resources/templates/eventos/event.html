@@ -1,0 +1,99 @@
+<div xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+     layout:decorator="masterpages/page">
+
+
+    <div layout:fragment="content">
+
+        <div class="wrapper row">
+            <div class="preview col-md-6">
+
+                <div class="preview-pic tab-content">
+                    <div class="tab-pane active" id="pic-1"><img th:src="${'../assets/images/' + evento.imgEvento}"/></div>
+                </div>
+
+            </div>
+            <div class="details col-md-6">
+                <h3 class="product-title" th:text="${evento.nomeEvento}">Nome evento</h3>
+                <div class="rating">
+                    <div class="stars">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                </div>
+                <p class="product-description" th:text="${evento.descEvento}"></p>
+            </div>
+        </div>
+
+        <hr/>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Avaliações realizadas</h4>
+                <hr/>
+
+                <div th:each="a : ${avaliacoes}">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-2 col-md-1">
+                                    <img src="http://placehold.it/80" class="img-circle img-responsive" alt=""/></div>
+                                <div class="col-xs-10 col-md-11">
+                                    <div>
+                                        <a href="#" th:text="${a.usuariosIdUsusario.nomeUsusario}"></a>
+                                        <div class="mic-info">
+                                            <small>postado em: <span th:text="${a.dataAvaliacao}"></span></small>
+                                        </div>
+                                    </div>
+                                    <div class="comment-text" th:text="${a.comenAvaliacao}">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-horizontal" style="padding: 15px;">
+                    <div class="form-group">
+                        <label class="control-label">Nome: </label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">E-mail: </label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Avaliação: </label>
+                        <select class="form-control">
+                            <option>-- Selecione --</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Justificativa: </label>
+                        <textarea class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-sm btn-success"><span class="glyphicon glyphicon-check"></span> Enviar Comentário</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

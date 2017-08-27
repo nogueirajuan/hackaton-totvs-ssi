@@ -5,11 +5,18 @@
  */
 package com.each.previtale.service.bd.amazon.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,12 +29,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "usuarios")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u")
-    , @NamedQuery(name = "Usuarios.findByIdUsuario", query = "SELECT u FROM Usuarios u WHERE u.idUsuario = :idUsuario")
-    , @NamedQuery(name = "Usuarios.findByNomeUsusario", query = "SELECT u FROM Usuarios u WHERE u.nomeUsusario = :nomeUsusario")
-    , @NamedQuery(name = "Usuarios.findByEmailUsusario", query = "SELECT u FROM Usuarios u WHERE u.emailUsusario = :emailUsusario")
-    , @NamedQuery(name = "Usuarios.findBySenhaUsusario", query = "SELECT u FROM Usuarios u WHERE u.senhaUsusario = :senhaUsusario")})
 public class Usuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,8 +36,6 @@ public class Usuarios implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_usuario")
-    @GenericGenerator(name = "seqUsuarios", strategy = "org.hibernate.id.IncrementGenerator")
-    @GeneratedValue(generator = "seqUsuarios")
     private Integer idUsuario;
     @Basic(optional = false)
     @NotNull
@@ -54,9 +53,9 @@ public class Usuarios implements Serializable {
     @Column(name = "senha_ususario")
     private String senhaUsusario;
     @Lob
-    @Column(name = "foto_ususario")
-    private byte[] fotoUsusario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsusario")
+    @Column(name = "foto_usuario")
+    private String fotoUsusario;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosIdUsusario")
     private List<Avaliacoes> avaliacoesList;
 
     public Usuarios() {
@@ -105,11 +104,11 @@ public class Usuarios implements Serializable {
         this.senhaUsusario = senhaUsusario;
     }
 
-    public byte[] getFotoUsusario() {
+    public String getFotoUsusario() {
         return fotoUsusario;
     }
 
-    public void setFotoUsusario(byte[] fotoUsusario) {
+    public void setFotoUsusario(String fotoUsusario) {
         this.fotoUsusario = fotoUsusario;
     }
 

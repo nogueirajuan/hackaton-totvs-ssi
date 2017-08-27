@@ -1,0 +1,55 @@
+<div xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+     layout:decorator="masterpages/page">
+
+
+    <div layout:fragment="content">
+
+        <form class="form-horizontal">
+
+            <h1>Cadastrar evento</h1>
+            <hr/>
+
+            <div class="form-group">
+                <label class="control-label">Nome do evento:</label>
+                <input type="text" class="form-control" name="nome"/>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Endereço:</label>
+                <input type="text" class="form-control" name="endereco"/>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Descrição do evento:</label>
+                <textarea type="text" class="form-control" name="descricao"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Tipo de Evento:</label>
+                <select class="form-control">
+                    <option>-- Selecione --</option>
+                    <option>Cinema</option>
+                    <option>Danças</option>
+                    <option>Musica</option>
+                    <option>Shows</option>
+                    <option>Teatro</option>
+                    <option>Outros</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Data de realização:</label>
+                <input type="datetime-local" class="form-control" name="descricao"/>
+            </div>
+
+            <div class="form-group text-right" style="margin-bottom: 20px;">
+                <button class="btn btn-sm btn-success"><span class="glyphicon glyphicon-check"></span> Criar Evento
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+
+</div>

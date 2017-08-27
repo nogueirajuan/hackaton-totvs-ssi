@@ -1,32 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <head>
-    </head>
-    <body>
-        <!-- header-section-starts -->
-        <div class="header" th:fragment="header">
-            <div class="container"> 
-                <div class="pull-left logo">
-                    <a class="active" th:href="@{/home}"><img th:src="@{/images/logo_chain_reservas.png}" /></a>
-                </div>
-                <div class="top-menu">
-                    <ul>
-                        <nav class="cl-effect-5">
-                            <li><a class="active" th:href="@{/home}"><span data-hover="Home">Home</span></a></li> 
-                            <li>/</li>
-                            <li><a th:href="@{/about}"><span data-hover="Sobre">Sobre</span></a></li>
-                            <li>/</li>
-                            <li><a th:href="@{/contact}"><span data-hover="Contato">Contato</span></a></li>
-                            <li>/</li>
-                            <li><a th:href="@{/login}"><span data-hover="Acessar">Acessar</span></a></li>
-                        </nav>
-                    </ul>
-                </div>
+<head>
+</head>
+<body>
+
+<header id="home" class="navbar-fixed-top" th:fragment="header">
+
+    <!-- End navbar-collapse-->
+
+    <div class="main_menu_bg">
+        <div class="container">
+            <div class="row">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand our_logo" th:href="@{/index}"><img th:src="@{../assets/images/logo_box.png}" alt=""/></a>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a th:href="@{/index}">Início</a></li>
+                                <li><a th:href="@{/eventos/list}">Eventos</a></li>
+                                <li><a th:href="@{/eventos/cadastrar}">Cadastrar evento</a></li>
+                                <li><a th:href="@{/login}" class="booking">Entrar</a></li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
             </div>
-            <!--            <div class="logo">
-                            <a href="index.html"><img src="images/logo.jpg" alt="" /></a>
-                        </div>-->
         </div>
-        <!-- header-section-ends -->
-    </body>
+    </div>
+</header> <!-- End Header Section -->
+</body>
 </html>

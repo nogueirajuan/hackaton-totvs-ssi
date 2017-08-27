@@ -5,8 +5,6 @@
  */
 package com.each.previtale.service.bd.amazon.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -40,15 +38,15 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Eventos.findByEnderecoEvento", query = "SELECT e FROM Eventos e WHERE e.enderecoEvento = :enderecoEvento")
     , @NamedQuery(name = "Eventos.findByDescEvento", query = "SELECT e FROM Eventos e WHERE e.descEvento = :descEvento")
     , @NamedQuery(name = "Eventos.findByLatituEvento", query = "SELECT e FROM Eventos e WHERE e.latituEvento = :latituEvento")
-    , @NamedQuery(name = "Eventos.findByLongEvento", query = "SELECT e FROM Eventos e WHERE e.longEvento = :longEvento")})
+    , @NamedQuery(name = "Eventos.findByLongEvento", query = "SELECT e FROM Eventos e WHERE e.longEvento = :longEvento")
+    , @NamedQuery(name = "Eventos.findByTipoEvento", query = "SELECT e FROM Eventos e WHERE e.tipoEvento = :tipoEvento")})
 public class Eventos implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_evento")
-    @GenericGenerator(name = "seqEventos", strategy = "org.hibernate.id.IncrementGenerator")
-    @GeneratedValue(generator = "seqEventos")
     private Integer idEvento;
     @Size(max = 45)
     @Column(name = "img_evento")
@@ -78,6 +76,11 @@ public class Eventos implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "long_evento")
     private String longEvento;
+    @Size(max = 45)
+    @Column(name = "tipo_evento")
+    private String tipoEvento;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventosIdEvento")
+    private List<Avaliacoes> avaliacoesList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventosIdEvento")
     private List<Periodos> periodosList;
 
@@ -151,6 +154,23 @@ public class Eventos implements Serializable {
 
     public void setLongEvento(String longEvento) {
         this.longEvento = longEvento;
+    }
+
+    public String getTipoEvento() {
+        return tipoEvento;
+    }
+
+    public void setTipoEvento(String tipoEvento) {
+        this.tipoEvento = tipoEvento;
+    }
+
+    @XmlTransient
+    public List<Avaliacoes> getAvaliacoesList() {
+        return avaliacoesList;
+    }
+
+    public void setAvaliacoesList(List<Avaliacoes> avaliacoesList) {
+        this.avaliacoesList = avaliacoesList;
     }
 
     @XmlTransient

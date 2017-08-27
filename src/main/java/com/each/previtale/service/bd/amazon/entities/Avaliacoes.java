@@ -5,28 +5,29 @@
  */
 package com.each.previtale.service.bd.amazon.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author juan_
  */
 @Entity
 @Table(name = "avaliacoes")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Avaliacoes.findAll", query = "SELECT a FROM Avaliacoes a")
-    , @NamedQuery(name = "Avaliacoes.findByIdAvaliacao", query = "SELECT a FROM Avaliacoes a WHERE a.idAvaliacao = :idAvaliacao")
-    , @NamedQuery(name = "Avaliacoes.findByNotaAvaliacao", query = "SELECT a FROM Avaliacoes a WHERE a.notaAvaliacao = :notaAvaliacao")
-    , @NamedQuery(name = "Avaliacoes.findByComenAvaliacao", query = "SELECT a FROM Avaliacoes a WHERE a.comenAvaliacao = :comenAvaliacao")
-    , @NamedQuery(name = "Avaliacoes.findByDataAvaliacao", query = "SELECT a FROM Avaliacoes a WHERE a.dataAvaliacao = :dataAvaliacao")})
 public class Avaliacoes implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,8 +35,6 @@ public class Avaliacoes implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_avaliacao")
-    @GenericGenerator(name = "seqAvaliacoes", strategy = "org.hibernate.id.IncrementGenerator")
-    @GeneratedValue(generator = "seqAvaliacoes")
     private Integer idAvaliacao;
     @Column(name = "nota_avaliacao")
     private Integer notaAvaliacao;
@@ -45,12 +44,12 @@ public class Avaliacoes implements Serializable {
     @Column(name = "data_avaliacao")
     @Temporal(TemporalType.DATE)
     private Date dataAvaliacao;
-    @JoinColumn(name = "#id_evento", referencedColumnName = "id_evento")
+    @JoinColumn(name = "eventos_id_evento", referencedColumnName = "id_evento")
     @ManyToOne(optional = false)
-    private Eventos idEvento;
-    @JoinColumn(name = "#id_ususario", referencedColumnName = "id_usuario")
+    private Eventos eventosIdEvento;
+    @JoinColumn(name = "usuarios_id_ususario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
-    private Usuarios idUsusario;
+    private Usuarios usuariosIdUsusario;
 
     public Avaliacoes() {
     }
@@ -91,20 +90,20 @@ public class Avaliacoes implements Serializable {
         this.dataAvaliacao = dataAvaliacao;
     }
 
-    public Eventos getIdEvento() {
-        return idEvento;
+    public Eventos getEventosIdEvento() {
+        return eventosIdEvento;
     }
 
-    public void setIdEvento(Eventos idEvento) {
-        this.idEvento = idEvento;
+    public void setEventosIdEvento(Eventos eventosIdEvento) {
+        this.eventosIdEvento = eventosIdEvento;
     }
 
-    public Usuarios getIdUsusario() {
-        return idUsusario;
+    public Usuarios getUsuariosIdUsusario() {
+        return usuariosIdUsusario;
     }
 
-    public void setIdUsusario(Usuarios idUsusario) {
-        this.idUsusario = idUsusario;
+    public void setUsuariosIdUsusario(Usuarios usuariosIdUsusario) {
+        this.usuariosIdUsusario = usuariosIdUsusario;
     }
 
     @Override
@@ -129,7 +128,13 @@ public class Avaliacoes implements Serializable {
 
     @Override
     public String toString() {
-        return "com.each.previtale.service.bd.amazon.entities.Avaliacoes[ idAvaliacao=" + idAvaliacao + " ]";
+        return "Avaliacoes{" +
+                "idAvaliacao=" + idAvaliacao +
+                ", notaAvaliacao=" + notaAvaliacao +
+                ", comenAvaliacao='" + comenAvaliacao + '\'' +
+                ", dataAvaliacao=" + dataAvaliacao +
+                ", eventosIdEvento=" + eventosIdEvento +
+                ", usuariosIdUsusario=" + usuariosIdUsusario +
+                '}';
     }
-    
 }

@@ -1,0 +1,44 @@
+.header_top_menu .call_us_text a{
+	color:#666;
+	font-size:15px;
+	margin-left:15px;
+	padding:5px;
+	display:inline-block;
+}
+
+.main_slider_content{
+	padding:250px 0px 200px 0px;
+	width:70%;
+	margin:0 auto;
+	color:#fff;
+}
+
+.slider{
+	/* Alterar de acordo com o background*/
+	background:url(../images/bannerbg.jpg) center center no-repeat;
+	background-size:cover;
+}
+.main_slider {
+	
+}
+.main_slider .main_slider_content h1{
+font-size: 6rem;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    line-height: 6rem;
+    margin:0px 0px 60px 0px;
+}	
+.main_slider_content{
+	padding:250px 0px 200px 0px;
+	width:70%;
+	margin:0 auto;
+	color:#fff;
+}
+
+.slider_overlay{
+	/* Escurece parcialmente a imagem que é utilizado no slider*/
+	background:rgba(0, 0, 0, .6);
+	width:100%;
+	top:0;
+	left:0;
+}

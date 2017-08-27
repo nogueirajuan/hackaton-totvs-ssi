@@ -24,7 +24,7 @@ public class Controller {
         return "index";
     }
 
-    @RequestMapping("/home")
+    @RequestMapping("/index")
     public String homePage() {
         log.log(Level.INFO, "[HACKATHON]-[PAGE REQUEST]-[INDEX]");
         return "index";

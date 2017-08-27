@@ -1,61 +1,35 @@
-<div xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="masterpages/page">
+<div xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+     layout:decorator="masterpages/page-w">
 
 
-    <div layout:fragment="precontent">      
-        <!-- header-section-ends -->
-        <div class="header-slider" id="home">
-            <div class="slider">
-                <div class="callbacks_container">
-                    <ul class="rslides" id="slider">
+    <div layout:fragment="content">
 
-                        <li>
-                            <img th:src="@{/images/banner-02.jpg}" alt="" />
-                            <div class="caption text-center">
-                                <h3>Praticidade</h3>
-                                <p>Reserve a quadra para seus treinos em poucos cliques</p>
+        <section id="slider" class="slider">
+            <div class="slider_overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="main_slider text-center">
+                            <div class="col-md-12">
+                                <div class="main_slider_content wow zoomIn" data-wow-duration="1s">
+                                    <h1>Bem-vindos</h1>
+                                    <p>Procure por eventos culturais inclusivos para deficientes auditivos. </p>
+
+                                    <!--button href="" class="btn-lg">Click here</button> -->
+                                    <form th:action="@{/eventos/list}" class="input-group searchbar">
+										<span class="input-group-addon">
+											<a href="search.html"><i class="glyphicon glyphicon-search"></i></a>
+										</span>
+                                        <input type="text" class="form-control" placeholder="O que você procura?"/>
+                                    </form>
+                                </div>
                             </div>
-                        </li>
-                        <li>
-                            <img th:src="@{/images/banner-04.jpg}" alt="" />
-                            <div class="caption text-center">
-                                <h3>Acessível</h3>
-                                <p>Confira a disponibilidade das quadras a qualquer momento.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <img th:src="@{/images/banner-03.jpg}" alt="" />
-                            <div class="caption text-center">
-                                <h3>Agilize!</h3>
-                                <p>Precisa negociar o horário de uso do espaço? Entre em contato com os responsáveis de cada delegação e negocie as alterações.</p>
-                            </div>
-                        </li>
-                    </ul>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <div layout:fragment="content">       
-        <div class="welcome-section">
-            <div class="container">
-                <div class="col-md-6 welcome-grid text-center">
-                    <h3>Bem vindo</h3>
-                    <h5>Plataforma para reserva de uso de quadra</h5>
-                    <p>Uma solução para o gerenciamento do uso de espaço esportivo, de forma prática, permitindo uma distribuição mais prática e um melhor aproveitamento do tempo do ginásio.</p>
-                    <p>Precisa cancelar uma reserva? Todos tem acesso fácil e podem utilizar o seu horário.</p>
-                </div>
-                <div class="col-md-6 images">
-                    <div class="img1">
-                        <img src="images/a1.jpg" class="img-responsive" alt="" />
-                    </div>
-                    <div class="img2">
-                        <img src="images/a2.jpg" class="img-responsive" alt="" />
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
     </div>
 
 

@@ -2,15 +2,48 @@
      layout:decorator="masterpages/page">
 
 
-    <div layout:fragment="precontent">
-        eventos
-        <div th:text="${eventos}"></div>
-    </div>
-
     <div layout:fragment="content">
 
-        eventos
-        <div th:text="${eventos}"></div>
+
+        <form class="form-inline" th:action="@{/eventos/list}">
+            <div class="form-group col-md-12">
+
+                <div class="input-group input-group-lg col-md-12">
+                    <input type="text" class="form-control" name="search" placeholder="Busque o evento desejado. Por exemplo: Teatro"/>
+                    <div class="input-group-btn">
+                        <button class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                </div>
+                <hr/>
+            </div>
+        </form>
+
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <h4><span class="glyphicon glyphicon-list"></span> Eventos</h4>
+
+                <div th:each="e : ${eventos}">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3 col-md-3">
+                            <a th:href="@{'/eventos/event?id=' + ${e.idEvento}}">
+                                <img th:src="@{'../assets/images/' + ${e.imgEvento}}"
+                                     class="img-responsive img-box img-thumbnail"/>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-9 col-md-9">
+                            <h4><a th:href="@{'/eventos/event?id=' + ${e.idEvento}}" th:text="${e.nomeEvento}"></a></h4>
+                            <p th:Text="${e.descEvento}"></p>
+                        </div>
+                    </div>
+                    <hr/>
+                </div>
+
+
+            </div>
+        </div>
 
 
     </div>
