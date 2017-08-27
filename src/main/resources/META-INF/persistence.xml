@@ -16,6 +16,10 @@
     <class>com.each.previtale.service.bd.amazon.entities.PracaEsportiva</class>
     <class>com.each.previtale.service.bd.amazon.entities.Time</class>
     <class>com.each.previtale.service.bd.amazon.entities.MaterialEsportivo</class>
+    <class>com.each.previtale.service.bd.amazon.entities.Periodos</class>
+    <class>com.each.previtale.service.bd.amazon.entities.Eventos</class>
+    <class>com.each.previtale.service.bd.amazon.entities.Usuarios</class>
+    <class>com.each.previtale.service.bd.amazon.entities.Avaliacoes</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://andredbinstance2.cji4mp16okzc.us-east-2.rds.amazonaws.com:3306/trabalho_bd?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="andlopes"/>

@@ -20,31 +20,31 @@ public class Controller {
 
     @RequestMapping("/")
     public String home() {
-        log.log(Level.INFO, "[CHAIN RESERVAS]-[PAGE REQUEST]-[INDEX]");
+        log.log(Level.INFO, "[HACKATHON]-[PAGE REQUEST]-[INDEX]");
         return "index";
     }
 
     @RequestMapping("/home")
     public String homePage() {
-        log.log(Level.INFO, "[CHAIN RESERVAS]-[PAGE REQUEST]-[INDEX]");
+        log.log(Level.INFO, "[HACKATHON]-[PAGE REQUEST]-[INDEX]");
         return "index";
     }
 
     @RequestMapping("/about")
     public String about() {
-        log.log(Level.INFO, "[CHAIN RESERVAS]-[PAGE REQUEST]-[ABOUT]");
+        log.log(Level.INFO, "[HACKATHON]-[PAGE REQUEST]-[ABOUT]");
         return "about";
     }
 
     @RequestMapping("/contact")
     public String contact() {
-        log.log(Level.INFO, "[CHAIN RESERVAS]-[PAGE REQUEST]-[CONTACT]");
+        log.log(Level.INFO, "[HACKATHON]-[PAGE REQUEST]-[CONTACT]");
         return "contact";
     }
 
     @RequestMapping("/login")
     public String login() {
-        log.log(Level.INFO, "[CHAIN RESERVAS]-[PAGE REQUEST]-[LOGIN]");
+        log.log(Level.INFO, "[HACKATHON]-[PAGE REQUEST]-[LOGIN]");
         return "login/loginForm";
     }
 }
