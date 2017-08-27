@@ -16,8 +16,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -49,8 +47,8 @@ public class Eventos implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "id_evento")
-    @GenericGenerator(name = "seqAEvento", strategy = "org.hibernate.id.IncrementGenerator")
-    @GeneratedValue(generator = "seqAEvento")
+    @GenericGenerator(name = "seqEventos", strategy = "org.hibernate.id.IncrementGenerator")
+    @GeneratedValue(generator = "seqEventos")
     private Integer idEvento;
     @Size(max = 45)
     @Column(name = "img_evento")
@@ -80,11 +78,8 @@ public class Eventos implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "long_evento")
     private String longEvento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEvento")
-    private List<Avaliacoes> avaliacoesList;
-    @JoinColumn(name = "#id_periodo", referencedColumnName = "id_periodo")
-    @ManyToOne
-    private Periodos idPeriodo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventosIdEvento")
+    private List<Periodos> periodosList;
 
     public Eventos() {
     }
@@ -159,20 +154,12 @@ public class Eventos implements Serializable {
     }
 
     @XmlTransient
-    public List<Avaliacoes> getAvaliacoesList() {
-        return avaliacoesList;
+    public List<Periodos> getPeriodosList() {
+        return periodosList;
     }
 
-    public void setAvaliacoesList(List<Avaliacoes> avaliacoesList) {
-        this.avaliacoesList = avaliacoesList;
-    }
-
-    public Periodos getIdPeriodo() {
-        return idPeriodo;
-    }
-
-    public void setIdPeriodo(Periodos idPeriodo) {
-        this.idPeriodo = idPeriodo;
+    public void setPeriodosList(List<Periodos> periodosList) {
+        this.periodosList = periodosList;
     }
 
     @Override

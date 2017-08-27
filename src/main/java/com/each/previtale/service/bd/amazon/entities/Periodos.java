@@ -5,15 +5,19 @@
  */
 package com.each.previtale.service.bd.amazon.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,8 +38,6 @@ public class Periodos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_periodo")
-    @GenericGenerator(name = "seqPeriodos", strategy = "org.hibernate.id.IncrementGenerator")
-    @GeneratedValue(generator = "seqPeriodos")
     private Integer idPeriodo;
     @Size(max = 45)
     @Column(name = "dt_ini_periodo")
@@ -43,8 +45,9 @@ public class Periodos implements Serializable {
     @Size(max = 45)
     @Column(name = "dt_fim_periodo")
     private String dtFimPeriodo;
-    @OneToMany(mappedBy = "idPeriodo")
-    private List<Eventos> eventosList;
+    @JoinColumn(name = "eventos_id_evento", referencedColumnName = "id_evento")
+    @ManyToOne(optional = false)
+    private Eventos eventosIdEvento;
 
     public Periodos() {
     }
@@ -77,13 +80,12 @@ public class Periodos implements Serializable {
         this.dtFimPeriodo = dtFimPeriodo;
     }
 
-    @XmlTransient
-    public List<Eventos> getEventosList() {
-        return eventosList;
+    public Eventos getEventosIdEvento() {
+        return eventosIdEvento;
     }
 
-    public void setEventosList(List<Eventos> eventosList) {
-        this.eventosList = eventosList;
+    public void setEventosIdEvento(Eventos eventosIdEvento) {
+        this.eventosIdEvento = eventosIdEvento;
     }
 
     @Override
